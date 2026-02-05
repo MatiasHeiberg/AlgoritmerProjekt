@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace Algoritmer_Projekt
 {
-    public class MyList<T> where T : IComparable<T>
+    /// <summary>
+    /// TODO
+    /// Tilføjes indekser
+    /// Length property
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class MyList<T> where T : IComparable<T>, INumber<T>
     {
         private T[] _arr;
         private int _pointer;
@@ -70,8 +77,35 @@ namespace Algoritmer_Projekt
         }
 
         private void InsertionSort()
-        { 
-            throw new NotImplementedException(); 
+        {
+            if (_arr == null || _arr.Length == 0) 
+                throw new Exception();
+
+            for (int i = 1; i < _arr.Length; i++)
+            {
+                T key = _arr[i];      // Det tal vi vil placere
+                int pointer = i - 1;   // Vi starter med at kigge til venstre
+                int count = default;
+                // HER sker magien!
+                // Vi kombinerer begge stop-kriterier i én linje:
+                // 1. pointer >= 0:      Vi må ikke ryge ud over kanten
+                // 2. arr[pointer] > key: Tallet til venstre er større end vores key
+                while ( true )
+                {
+                    count++;
+                    if (pointer < 0) break;
+
+                    count++;
+                    if (_arr[pointer] < key) break;
+
+                    _arr[pointer + 1] = _arr[pointer]; // Skub det store tal til højre
+                    pointer--;                       // Ryk pointeren til venstre
+                }
+
+                // Når while-løkken stopper (enten pga. start af array eller et mindre tal),
+                // så er "pointer + 1" det korrekte hul til vores key.
+                _arr[pointer + 1] = key;
+            }
         }
     }
 }
