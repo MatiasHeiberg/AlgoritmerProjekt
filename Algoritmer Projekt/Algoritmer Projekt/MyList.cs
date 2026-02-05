@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Math
+namespace Algoritmer_Projekt
 {
     public class MyList<T> where T : IComparable<T>
     {
@@ -12,6 +12,7 @@ namespace Math
         public MyList()
         {
             _arr = new T[0];
+            _pointer = 0;
         }
         public void Add(T value)
         {
@@ -53,13 +54,24 @@ namespace Math
             Array.Clear(_arr);
         }
 
-        public void Sort()
+        public void Sort(int algorithm = 0)
         {
-            Array.Sort(_arr);
+
         }
+        
         public int CompareTo(object? obj)
         {
             throw new NotImplementedException();
+        }
+
+        private void BubbleSort()
+        { 
+            throw new NotImplementedException(); 
+        }
+
+        private void InsertionSort()
+        { 
+            throw new NotImplementedException(); 
         }
     }
 }

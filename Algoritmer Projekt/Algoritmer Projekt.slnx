@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="Algoritmer Projekt/Algoritmer Projekt.csproj" />
+  <Project Path="Algoritmer Projekt/Del 1 - Sort.csproj" />
+  <Project Path="GraphAndSearch/Del 2 - GraphAndSearch.csproj" Id="80966571-35e1-4f9e-aa91-5444900f0876" />
 </Solution>

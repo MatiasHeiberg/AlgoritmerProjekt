@@ -4,7 +4,13 @@ using System.Text;
 
 namespace Algoritmer_Projekt
 {
-    internal class Sort
+    public class Sort
     {
+        public static MyList<T> BubbleSort<T>(MyList<T> list)
+        {
+            return list;
+        }
+        public InsertionSort()
+        { }
     }
 }

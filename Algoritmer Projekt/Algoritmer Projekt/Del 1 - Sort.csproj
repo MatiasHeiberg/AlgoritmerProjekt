@@ -8,4 +8,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GraphAndSearch\Del 2 - GraphAndSearch.csproj" />
+  </ItemGroup>
+
 </Project>
