@@ -7,14 +7,18 @@ namespace Algoritmer_Projekt
 {
     /// <summary>
     /// TODO
-    /// Tilføjes indekser
-    /// Length property
+    /// Tilføjes indekser 
+    /// Implementere bubblesort og gøre den generisk, bruge IComparable og tælle sammenligninger
+    /// Implementere Sort() metoden der skal bruge algortime metoderne
+    /// Unit test for algoritmerne
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class MyList<T> where T : IComparable<T>, INumber<T>
     {
         private T[] _arr;
         private int _pointer;
+
+        public int Length {  get { return _pointer; } }
 
         public MyList()
         {
@@ -61,9 +65,10 @@ namespace Algoritmer_Projekt
             Array.Clear(_arr);
         }
 
-        public void Sort(int algorithm = 0)
+        public int Sort(int algorithm = 0)
         {
-
+            int count = default;
+            return count;
         }
         
         public int CompareTo(object? obj)
@@ -71,21 +76,107 @@ namespace Algoritmer_Projekt
             throw new NotImplementedException();
         }
 
-        private void BubbleSort()
+        private int BubbleSort()
         { 
             throw new NotImplementedException(); 
         }
 
-        private void InsertionSort()
+
+        public int LBubbleSort()
         {
-            if (_arr == null || _arr.Length == 0) 
+            int comparisonCount = 0;
+            bool swapped; // bool der fortæller om der er lavet en bytning
+            do
+            {
+                swapped = false;
+
+                for (int i = 0; i < _arr.Length - 1; i++)
+                {
+                    comparisonCount++;
+
+                    if (_arr[i] > _arr[i+1])
+                      {
+                        T temp = _arr[i];
+                        _arr[i] = _arr[i + 1];
+                        _arr[i + 1] = temp;
+
+                        swapped = true;
+                       }
+                }
+            }
+            while (swapped);
+            return comparisonCount;
+        }
+
+
+
+         public int MBubbleSort()
+                {
+                    int comparisonCount = default;
+                    int unsorted = _arr.Length - 1;
+                    bool swapped;
+                    while (unsorted > 0)
+                    {
+                        swapped = false;
+                        for (int i = 0; i < unsorted; i++)
+                        {
+                            comparisonCount++;
+                            if (_arr[i] > _arr[i + 1])
+                            {
+                                T temp = _arr[i];
+                                _arr[i] = _arr[i + 1];
+                                _arr[i + 1] = temp;
+
+                                swapped = true;
+                            }
+                        }
+                        if (!swapped) // Hvis vi ingen værdier blev byttet efter at have itereret hele listen igennem, så er det fordi den allerede er sorteret. 
+                            break; // Stop sorteringen tidligt.
+
+                        unsorted--;
+                    }
+                    return comparisonCount;
+                }
+
+        /*
+        private void ABubbleSort()
+        {
+            bool swapped = true;
+
+            while (swapped)
+            {
+                swapped = false;
+                for (int i = 1; i < B.Length; i++)
+                {
+                    if (B[i - 1] > B[i])
+                    {
+                        int var = B[i]; // midlertidig variabel til at holde værdien
+                        B[i] = (B[i - 1]); // flytter den anden værdi
+                        B[i - 1] = var; // sætter den gemte værdi ind
+
+                        swapped = true;
+                    }
+                }
+            }
+        }
+         */
+        private int InsertionSort()
+        {
+            int count = default;                        // Vores comparison tæller
+
+            count++;
+            if (_arr == null)
                 throw new Exception();
+
+            count++;
+            if (_arr.Length == 0)
+                throw new Exception();
+
 
             for (int i = 1; i < _arr.Length; i++)
             {
                 T key = _arr[i];                        // Det tal vi vil placere
                 int pointer = i - 1;                    // Vi starter med at kigge til venstre
-                int count = default;                    // Vores comparison tæller
                                                         
                 while ( true )
                 {
@@ -103,6 +194,7 @@ namespace Algoritmer_Projekt
                                                         // så er "pointer + 1" det korrekte hul til vores key.
                 _arr[pointer + 1] = key;
             }
+            return count;
         }
     }
 }

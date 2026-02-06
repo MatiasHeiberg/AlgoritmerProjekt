@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Del 2 - GraphAndSearch\Del 2 - GraphAndSearch.csproj" />
-    <ProjectReference Include="..\GraphAndSearch\Del 2 - GraphAndSearch.csproj" />
   </ItemGroup>
 
 </Project>
