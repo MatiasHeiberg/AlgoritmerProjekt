@@ -90,7 +90,7 @@ namespace Algoritmer_Projekt
             {
                 swapped = false;
 
-                for (int i = 0; i < _arr.Length - 1; i++)
+                for (int i = 0; i < Length - 1; i++)
                 {
                     comparisonCount++;
 
@@ -113,7 +113,7 @@ namespace Algoritmer_Projekt
          public int MBubbleSort()
                 {
                     int comparisonCount = default;
-                    int unsorted = _arr.Length - 1;
+                    int unsorted = Length - 1;
                     bool swapped;
                     while (unsorted > 0)
                     {
@@ -196,5 +196,16 @@ namespace Algoritmer_Projekt
             }
             return count;
         }
+        
+        public override string ToString()
+        {
+            string s = "";
+            foreach(T value in  _arr)
+            {
+                s += value + ", ";
+            }
+            return s;   
+        }
+        
     }
 }

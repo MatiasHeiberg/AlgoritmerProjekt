@@ -9,22 +9,30 @@ namespace Algoritmer_Projekt
     /// Sorteres
     /// Eksporteres til ny JSON eller txt
     /// </summary>
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            MyList<int> list = new MyList<int>();
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            //list.Add(1000);
-            //list.Add(-2);
-            //list.Add(8);
-            //list.Add(45);
-            //list.Add(1);
+            MyList<int> list2 = new MyList<int>();
+            MyList<int> list1 = new MyList<int>();
 
-            Console.WriteLine(list.LBubbleSort());
-            Console.WriteLine(list.MBubbleSort());
+            Add(list2);
+            Add(list1);
+
+            Console.WriteLine($"L: {list2.LBubbleSort()}\n{list2}");
+            Console.WriteLine($"M: {list1.MBubbleSort()}\n{list1}");
+        }
+        public static MyList<int> Add(MyList<int> list)
+        {
+            list.Add(3);
+            list.Add(2);
+            list.Add(1);
+            list.Add(1000);
+            list.Add(-2);
+            list.Add(8);
+            list.Add(45);
+            list.Add(1);
+            return list;
         }
     }
 }
