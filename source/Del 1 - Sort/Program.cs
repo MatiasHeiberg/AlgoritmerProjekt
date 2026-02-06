@@ -13,14 +13,11 @@ namespace Algoritmer_Projekt
     {
         static void Main(string[] args)
         {
-            MyList<int> list2 = new MyList<int>();
             MyList<int> list1 = new MyList<int>();
 
-            Add(list2);
             Add(list1);
 
-            Console.WriteLine($"L: {list2.LBubbleSort()}\n{list2}");
-            Console.WriteLine($"M: {list1.MBubbleSort()}\n{list1}");
+            Console.WriteLine($"Bubble sort: {list1.Sort()}\n{list1}");
         }
         public static MyList<int> Add(MyList<int> list)
         {

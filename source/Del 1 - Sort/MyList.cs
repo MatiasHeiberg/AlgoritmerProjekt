@@ -8,12 +8,11 @@ namespace Algoritmer_Projekt
     /// <summary>
     /// TODO
     /// Tilføjes indekser 
-    /// Implementere bubblesort , bruge IComparer<T>
     /// Implementere Sort() metoden der skal bruge algortime metoderne
     /// Unit test for algoritmerne
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MyList<T> where T : IComparer<T>
+    public class MyList<T> 
     {
         private T[] _arr;
         private int _pointer;
@@ -40,7 +39,7 @@ namespace Algoritmer_Projekt
             _pointer++;
 
         }
-
+        /*
         public void Remove(T value)
         {
             if (value == null)
@@ -58,55 +57,22 @@ namespace Algoritmer_Projekt
 
             if (_pointer <  (_arr.Length / 2) / 2)
                 Array.Resize(ref _arr, _arr.Length / 2);
-        }
+        } */
 
         public void Clear()
         {
             Array.Clear(_arr);
         }
 
-        public int Sort(int algorithm = 0)
+        public int Sort(IComparer<T>? comparer = null)
         {
-            int count = default;
-            return count;
+            var activeComparer = comparer ?? Comparer<T>.Default;
+
+            return BubbleSort(activeComparer);
         }
-        
+      
 
-        private int BubbleSort()
-        { 
-            throw new NotImplementedException(); 
-        }
-
-        // Ubrugt implementation af bubble sort.
-        //public int LBubbleSort()
-        //{
-        //    int comparisonCount = 0;
-        //    bool swapped; // bool der fortæller om der er lavet en bytning
-        //    do
-        //    {
-        //        swapped = false;
-
-        //        for (int i = 0; i < Length - 1; i++)
-        //        {
-        //            comparisonCount++;
-
-        //            if (_arr[i] > _arr[i+1])
-        //              {
-        //                T temp = _arr[i];
-        //                _arr[i] = _arr[i + 1];
-        //                _arr[i + 1] = temp;
-
-        //                swapped = true;
-        //               }
-        //        }
-        //    }
-        //    while (swapped);
-        //    return comparisonCount;
-        //}
-
-
-
-        public int MBubbleSort()
+        private int BubbleSort(IComparer<T> comparer)
                 {
                     int comparisonCount = default;
                     int unsorted = Length - 1;
@@ -116,8 +82,11 @@ namespace Algoritmer_Projekt
                         swapped = false;
                         for (int i = 0; i < unsorted; i++)
                         {
+                            var current = _arr[i];
+                            var next = _arr[i + 1];
+
                             comparisonCount++;
-                            if (_arr[i] > _arr[i + 1])
+                            if (comparer.Compare(current, next) > 0)
                             {
                                 T temp = _arr[i];
                                 _arr[i] = _arr[i + 1];
@@ -133,30 +102,8 @@ namespace Algoritmer_Projekt
                     }
                     return comparisonCount;
                 }
-
-        /* // Ubrugt implementation af bubble sort.
-        private void ABubbleSort()
-        {
-            bool swapped = true;
-
-            while (swapped)
-            {
-                swapped = false;
-                for (int i = 1; i < B.Length; i++)
-                {
-                    if (B[i - 1] > B[i])
-                    {
-                        int var = B[i]; // midlertidig variabel til at holde værdien
-                        B[i] = (B[i - 1]); // flytter den anden værdi
-                        B[i - 1] = var; // sætter den gemte værdi ind
-
-                        swapped = true;
-                    }
-                }
-            }
-        }
-         */
-        private int InsertionSort()
+        
+        private int InsertionSort(IComparer<T> comparer)
         {
             int count = default;                        // Vores comparison tæller
 
@@ -180,7 +127,7 @@ namespace Algoritmer_Projekt
                     if (pointer < 0) break;             // Pointer >= 0: Vi må ikke ryge ud over kanten
 
                     count++;
-                    if (_arr[pointer] < key) break;     // arr[pointer] < key: Tallet til venstre er mindre end vores key
+                    if (comparer.Compare(_arr[pointer], key) > 0) break;     // arr[pointer] < key: Tallet til venstre er mindre end vores key
 
                     _arr[pointer + 1] = _arr[pointer];  // Skub det store tal til højre
                     pointer--;                          // Ryk pointeren til venstre
@@ -191,14 +138,14 @@ namespace Algoritmer_Projekt
                 _arr[pointer + 1] = key;
             }
             return count;
-        }
+        } 
         
         public override string ToString()
         {
             string s = String.Empty;
             foreach(T value in  _arr)
             {
-                s = value + ", ";
+                s += value + ", ";
             }
             return s;   
         }
