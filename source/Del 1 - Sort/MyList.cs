@@ -64,11 +64,13 @@ namespace Algoritmer_Projekt
             Array.Clear(_arr);
         }
 
-        public int Sort(IComparer<T>? comparer = null)
+        public int Sort(IComparer<T>? comparer = null, int algorithm = 0)
         {
             var activeComparer = comparer ?? Comparer<T>.Default;
 
-            return BubbleSort(activeComparer);
+            if (algorithm == 0) return BubbleSort(activeComparer);
+            if (algorithm == 1) return InsertionSort(activeComparer);
+            else throw new ArgumentException();
         }
       
 
@@ -138,17 +140,12 @@ namespace Algoritmer_Projekt
                 _arr[pointer + 1] = key;
             }
             return count;
-        } 
-        
+        }
+
         public override string ToString()
         {
-            string s = String.Empty;
-            foreach(T value in  _arr)
-            {
-                s += value + ", ";
-            }
-            return s;   
+            return $"[{string.Join(", ", _arr)}]";
         }
-        
+
     }
 }
