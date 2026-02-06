@@ -8,12 +8,12 @@ namespace Algoritmer_Projekt
     /// <summary>
     /// TODO
     /// Tilføjes indekser 
-    /// Implementere bubblesort og gøre den generisk, bruge IComparable og tælle sammenligninger
+    /// Implementere bubblesort , bruge IComparer<T>
     /// Implementere Sort() metoden der skal bruge algortime metoderne
     /// Unit test for algoritmerne
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MyList<T> where T : IComparable<T>, INumber<T>
+    public class MyList<T> where T : IComparer<T>
     {
         private T[] _arr;
         private int _pointer;
@@ -46,7 +46,7 @@ namespace Algoritmer_Projekt
             if (value == null)
                 throw new ArgumentNullException("Value cannot be null");
 
-            int removedItem = Array.FindLastIndex(_arr, _pointer - 1, _pointer, i => i != null &&  i.CompareTo(value) == 0);
+            int removedItem = Array.FindLastIndex(_arr, _pointer - 1, _pointer, i => i != null &&  i.Compare(value) == 0);
             _arr[removedItem] = default;
 
             for (int i = removedItem; i < _pointer; i++)
@@ -71,46 +71,42 @@ namespace Algoritmer_Projekt
             return count;
         }
         
-        public int CompareTo(object? obj)
-        {
-            throw new NotImplementedException();
-        }
 
         private int BubbleSort()
         { 
             throw new NotImplementedException(); 
         }
 
+        // Ubrugt implementation af bubble sort.
+        //public int LBubbleSort()
+        //{
+        //    int comparisonCount = 0;
+        //    bool swapped; // bool der fortæller om der er lavet en bytning
+        //    do
+        //    {
+        //        swapped = false;
 
-        public int LBubbleSort()
-        {
-            int comparisonCount = 0;
-            bool swapped; // bool der fortæller om der er lavet en bytning
-            do
-            {
-                swapped = false;
+        //        for (int i = 0; i < Length - 1; i++)
+        //        {
+        //            comparisonCount++;
 
-                for (int i = 0; i < Length - 1; i++)
-                {
-                    comparisonCount++;
+        //            if (_arr[i] > _arr[i+1])
+        //              {
+        //                T temp = _arr[i];
+        //                _arr[i] = _arr[i + 1];
+        //                _arr[i + 1] = temp;
 
-                    if (_arr[i] > _arr[i+1])
-                      {
-                        T temp = _arr[i];
-                        _arr[i] = _arr[i + 1];
-                        _arr[i + 1] = temp;
-
-                        swapped = true;
-                       }
-                }
-            }
-            while (swapped);
-            return comparisonCount;
-        }
+        //                swapped = true;
+        //               }
+        //        }
+        //    }
+        //    while (swapped);
+        //    return comparisonCount;
+        //}
 
 
 
-         public int MBubbleSort()
+        public int MBubbleSort()
                 {
                     int comparisonCount = default;
                     int unsorted = Length - 1;
@@ -138,7 +134,7 @@ namespace Algoritmer_Projekt
                     return comparisonCount;
                 }
 
-        /*
+        /* // Ubrugt implementation af bubble sort.
         private void ABubbleSort()
         {
             bool swapped = true;
@@ -199,10 +195,10 @@ namespace Algoritmer_Projekt
         
         public override string ToString()
         {
-            string s = "";
+            string s = String.Empty;
             foreach(T value in  _arr)
             {
-                s += value + ", ";
+                s = value + ", ";
             }
             return s;   
         }
