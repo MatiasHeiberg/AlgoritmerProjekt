@@ -83,27 +83,24 @@ namespace Algoritmer_Projekt
 
             for (int i = 1; i < _arr.Length; i++)
             {
-                T key = _arr[i];      // Det tal vi vil placere
-                int pointer = i - 1;   // Vi starter med at kigge til venstre
-                int count = default;
-                // HER sker magien!
-                // Vi kombinerer begge stop-kriterier i én linje:
-                // 1. pointer >= 0:      Vi må ikke ryge ud over kanten
-                // 2. arr[pointer] > key: Tallet til venstre er større end vores key
+                T key = _arr[i];                        // Det tal vi vil placere
+                int pointer = i - 1;                    // Vi starter med at kigge til venstre
+                int count = default;                    // Vores comparison tæller
+                                                        
                 while ( true )
                 {
                     count++;
-                    if (pointer < 0) break;
+                    if (pointer < 0) break;             // Pointer >= 0: Vi må ikke ryge ud over kanten
 
                     count++;
-                    if (_arr[pointer] < key) break;
+                    if (_arr[pointer] < key) break;     // arr[pointer] < key: Tallet til venstre er mindre end vores key
 
-                    _arr[pointer + 1] = _arr[pointer]; // Skub det store tal til højre
-                    pointer--;                       // Ryk pointeren til venstre
+                    _arr[pointer + 1] = _arr[pointer];  // Skub det store tal til højre
+                    pointer--;                          // Ryk pointeren til venstre
                 }
 
-                // Når while-løkken stopper (enten pga. start af array eller et mindre tal),
-                // så er "pointer + 1" det korrekte hul til vores key.
+                                                        // Når while-løkken stopper (enten pga. start af array eller et mindre tal),
+                                                        // så er "pointer + 1" det korrekte hul til vores key.
                 _arr[pointer + 1] = key;
             }
         }
