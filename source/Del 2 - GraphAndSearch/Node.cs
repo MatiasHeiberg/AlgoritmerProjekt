@@ -13,11 +13,12 @@ namespace GraphAndSearch
         public T Value { get; }
         private List<Edge<T>> _edges;
 
-        public Node(T value, Node<T> parent) 
+        public Node(T value, Node<T> parent)
         {
-            Edge<T> edge = new Edge<T>(this, parent);
+            var edge = new Edge<T>(this, parent);
+            _edges = [edge];
             Value = value;
-            _edges = new List<Edge<T>>();
+            parent.AddEdge(edge);
         }
         public void AddEdge(Edge<T> edge)
         {
