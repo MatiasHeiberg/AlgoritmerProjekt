@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using System.Linq;
+using System.Collections;
 
 namespace Algoritmer_Projekt
 {
     /// <summary>
     /// TODO
-    /// Tilføjes indekser 
-    /// Unit test for algoritmerne
+    /// Unit test for algoritmerne: 1 elemement, flere ens elementer, allerede sorteret, reverse, en null liste, performance test,
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MyList<T> 
+    public class MyList<T> : IEnumerable<T>, ICollection
     {
         private T[] _arr;
         private int _pointer;
 
-        public int Length {  get { return _pointer; } }
+        public int Count {  get { return _pointer; } }
+
+        public bool IsSynchronized => throw new NotImplementedException();
+
+        public object SyncRoot => throw new NotImplementedException();
+
         public T this[int index]
         {
             get { return _arr[index]; }
@@ -80,8 +86,10 @@ namespace Algoritmer_Projekt
 
         private int BubbleSort(IComparer<T> comparer)
                 {
+            if (_arr.Length == 0) throw new ArgumentException();
+            
                     int comparisonCount = default;
-                    int unsorted = Length - 1;
+                    int unsorted = Count - 1;
                     bool swapped;
                     while (unsorted > 0)
                     {
@@ -119,7 +127,7 @@ namespace Algoritmer_Projekt
 
             count++;
             if (_arr.Length == 0)
-                throw new Exception();
+                throw new ArgumentException();
 
 
             for (int i = 1; i < _arr.Length; i++)
@@ -151,6 +159,19 @@ namespace Algoritmer_Projekt
             return $"[{string.Join(", ", _arr)}]";
         }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void CopyTo(Array array, int index)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
-½
