@@ -15,9 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="notSorted.json" />
-    <Content Include="reverseSorted.json" />
-    <Content Include="sorted.json" />
+    <Content Include="notSorted.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="reverseSorted.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sorted.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

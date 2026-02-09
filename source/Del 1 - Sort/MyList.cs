@@ -8,7 +8,6 @@ namespace Algoritmer_Projekt
     /// <summary>
     /// TODO
     /// Tilføjes indekser 
-    /// Implementere Sort() metoden der skal bruge algortime metoderne
     /// Unit test for algoritmerne
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -18,6 +17,11 @@ namespace Algoritmer_Projekt
         private int _pointer;
 
         public int Length {  get { return _pointer; } }
+        public T this[int index]
+        {
+            get { return _arr[index]; }
+            set { _arr[index] = value;  }
+        } 
 
         public MyList()
         {
