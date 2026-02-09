@@ -6,23 +6,23 @@ namespace Del1_Sort.Test
     public class MyListTest
     {
         [TestMethod]
-        public void SortTest_sortereTomListeMedBubble_returnererArgumentException() //MetodeTest_Scenarie_ForventetResultat
+        public void SortTest_sortereTomListeMedBubble_returnererArgumentException()     //MetodeTest_Scenarie_ForventetResultat
         {
             // Arrange
             var list = new MyList<int>();
 
             // Assert
-            Assert.Throws<ArgumentException>(() => list.Sort(algorithm: 0));
+            Assert.Throws<ArgumentException>(() => list.Sort(algorithm: 0));            // 0 = bubble sort
         }
 
         [TestMethod]
-        public void SortTest_sortereTomListeMedInsertion_returnererArgumentException() //MetodeTest_Scenarie_ForventetResultat
+        public void SortTest_sortereTomListeMedInsertion_returnererArgumentException()  //MetodeTest_Scenarie_ForventetResultat
         {
             // Arrange
             var list = new MyList<int>();
 
             // Assert
-            Assert.Throws<ArgumentException>(() => list.Sort(algorithm: 1));
+            Assert.Throws<ArgumentException>(() => list.Sort(algorithm: 1));            // 1 = insertion sort
         }
 
         [TestMethod]

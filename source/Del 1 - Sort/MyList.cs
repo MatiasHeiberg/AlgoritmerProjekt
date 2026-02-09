@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GraphAndSearch;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Text;
-using System.Linq;
-using System.Collections;
 
 namespace Algoritmer_Projekt
 {
@@ -161,7 +162,12 @@ namespace Algoritmer_Projekt
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            int i = 0;
+            while (i < Count)
+            {
+                yield return _arr[i];
+                i++;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
