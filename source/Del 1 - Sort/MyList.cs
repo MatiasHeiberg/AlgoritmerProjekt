@@ -149,3 +149,4 @@ namespace Algoritmer_Projekt
 
     }
 }
+½

@@ -9,6 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="notSorted.json" />
+    <None Remove="reverseSorted.json" />
+    <None Remove="sorted.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="notSorted.json" />
+    <Content Include="reverseSorted.json" />
+    <Content Include="sorted.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Del 2 - GraphAndSearch\Del 2 - GraphAndSearch.csproj" />
   </ItemGroup>
 
