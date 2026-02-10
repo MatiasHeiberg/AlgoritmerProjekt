@@ -10,14 +10,13 @@ namespace GraphAndSearch
     /// <typeparam name="T"></typeparam>
     public class Edge<T>
     {
-        public Node<T> From { get; }
+        private Node<T> _node1 { get; }
+        private Node<T> _node2 { get; }
 
-        public Node<T> To { get; }
-
-        public Edge(Node<T> from, Node<T> to)
+        public Edge(Node<T> childNode, Node<T> parentNode)
         {
-            From = from;
-            To = to;
+            _node1 = childNode;
+            _node2 = parentNode;
         }
     }
 }

@@ -7,13 +7,16 @@ namespace GraphAndSearch
 {
     public class Graph<T>
     {
-        private readonly Dictionary<T, Node<T>> _nodes = new();
+        private readonly Dictionary<T, Node<T>> _nodes;
 
+        public Graph(T rootKey) 
+        {
+            _nodes = [];
+            _nodes[rootKey] = new Node<T>(rootKey);
 
-
+        }
         public void AddNode(T value)
         {
-            _nodes[value] = new Node<T>(value);
         }
 
         public void AddEdges(T from, T to)

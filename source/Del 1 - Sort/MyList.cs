@@ -157,7 +157,7 @@ namespace Algoritmer_Projekt
 
         public override string ToString()
         {
-            return $"[{string.Join(", ", _arr)}]";
+            return $"[{string.Join(", ", _arr[.._pointer])}]";
         }
 
         public IEnumerator<T> GetEnumerator()

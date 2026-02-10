@@ -10,9 +10,13 @@ namespace GraphAndSearch
     /// <typeparam name="T"></typeparam>
     public class Node<T>
     {
-        public T Value { get; }
         private List<Edge<T>> _edges;
+        public T Value { get; }
 
+        public Node(T value) : this(value, parent: this)
+        {
+        
+        }
         public Node(T value, Node<T> parent)
         {
             var edge = new Edge<T>(this, parent);

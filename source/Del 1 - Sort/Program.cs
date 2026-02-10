@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Algoritmer_Projekt
 {
@@ -9,27 +12,38 @@ namespace Algoritmer_Projekt
     /// Sorteres
     /// Eksporteres til ny JSON eller txt
     /// </summary>
+
     public class Program
     {
         static void Main(string[] args)
         {
-            MyList<int> list1 = new MyList<int>();
 
-            Add(list1);
+            MyList<int> list = new MyList<int>();
+            string basePath = AppContext.BaseDirectory;
+            string filePath = Path.Combine(basePath, "notSorted.json");
+            string jsonString = File.ReadAllText(filePath);
 
-            Console.WriteLine($"Bubble sort: {list1.Sort()}\n{list1}");
+            var data = JsonSerializer.Deserialize<NumbersData>(jsonString);
+            int[]? arr = data?.Values;
+
+            foreach (int i in arr)
+            {
+                list.Add(i);
+            }
+
+            Console.WriteLine($"Bubble sort: {list.Sort()}\n{list}");
         }
-        public static MyList<int> Add(MyList<int> list)
+
+        //private static void Write<T>(MyList<T> list)
+        //{
+        //    T[] arr = list.ToArray();
+        //    string outPath = App
+        //}
+
+        public class NumbersData
         {
-            list.Add(3);
-            list.Add(2);
-            list.Add(1);
-            list.Add(1000);
-            list.Add(-2);
-            list.Add(8);
-            list.Add(45);
-            list.Add(1);
-            return list;
+            [JsonPropertyName("values")]
+            public int[] Values { get; set; } = Array.Empty<int>();
         }
     }
 }
