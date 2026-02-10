@@ -10,7 +10,8 @@ namespace Algoritmer_Projekt
 {
     /// <summary>
     /// TODO
-    /// Unit test for algoritmerne: 1 elemement, flere ens elementer, allerede sorteret, reverse
+    /// Input fra alle filer
+    /// Alle output
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class MyList<T> : IEnumerable<T>, ICollection

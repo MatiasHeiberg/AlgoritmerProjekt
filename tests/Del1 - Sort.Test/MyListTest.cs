@@ -94,11 +94,11 @@ namespace Del1_Sort.Test
 
         private static IEnumerable<object[]> GetSortTestData()
         {
-            yield return new object[] { new List<int> { 5, 3, 8, 9, 2 }, new List<int> { 2, 3, 5, 8, 9 } };
-            yield return new object[] { new List<int> { 1, 2, 3, 4, 5 }, new List<int> { 1, 2, 3, 4, 5 } };
-            yield return new object[] { new List<int> { 5, 4, 3, 2, 1 }, new List<int> { 1, 2, 3, 4, 5 } };
-            yield return new object[] { new List<int> { 2, 2, 1, 3, 3 }, new List<int> { 1, 2, 2, 3, 3 } };
-            yield return new object[] { new List<int> { -1, -3, 2, 3 }, new List<int> { -3, -1, 2, 3 } };
+            yield return new object[] { new List<int> { 5, 3, 8, 9, 2 }, new List<int> { 2, 3, 5, 8, 9 } }; // Tilfældige tal, average case
+            yield return new object[] { new List<int> { 1, 2, 3, 4, 5 }, new List<int> { 1, 2, 3, 4, 5 } }; // Sorteret 
+            yield return new object[] { new List<int> { 5, 4, 3, 2, 1 }, new List<int> { 1, 2, 3, 4, 5 } }; // Sorteret reverse
+            yield return new object[] { new List<int> { 2, 2, 1, 3, 3 }, new List<int> { 1, 2, 2, 3, 3 } }; // Flere ens tal
+            yield return new object[] { new List<int> { -1, -3, 2, 3 }, new List<int> { -3, -1, 2, 3 } };   // Minus tal
         }
 
         private MyList<int> ConvertToMyList(List<int> value)
