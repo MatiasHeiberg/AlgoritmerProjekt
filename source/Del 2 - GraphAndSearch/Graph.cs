@@ -5,14 +5,14 @@ using System.Xml.Linq;
 
 namespace GraphAndSearch
 {
-    public class Graph<T>
+    public class Graph<T> where T : notnull
     {
         private readonly Dictionary<T, Node<T>> _nodes;
 
         public Graph(T rootKey) 
         {
             _nodes = [];
-            _nodes[rootKey] = new Node<T>(rootKey);
+           // _nodes[rootKey] = new Node<T>(rootKey);
 
         }
         public void AddNode(T value)

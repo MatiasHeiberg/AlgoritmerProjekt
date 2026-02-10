@@ -13,10 +13,10 @@ namespace GraphAndSearch
         private List<Edge<T>> _edges;
         public T Value { get; }
 
-        public Node(T value) : this(value, parent: this)
-        {
+        //public Node(T value) : this(value, parent: this)
+        //{
         
-        }
+        //}
         public Node(T value, Node<T> parent)
         {
             var edge = new Edge<T>(this, parent);
