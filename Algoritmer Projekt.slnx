@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="source/Del 1 - Sort/Del 1 - Sort.csproj" />
+  <Project Path="source/Del 2 - GraphAndSearch/Del 2 - GraphAndSearch.csproj" />
+  <Project Path="tests/Del1 - Sort.Test/Del1 - Sort.Test.csproj" />
+</Solution>
