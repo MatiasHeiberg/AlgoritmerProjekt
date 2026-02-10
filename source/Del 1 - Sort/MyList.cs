@@ -76,6 +76,7 @@ namespace Algoritmer_Projekt
         }
 
         public int Sort(IComparer<T>? comparer = null, int algorithm = 0)
+
         {
             var activeComparer = comparer ?? Comparer<T>.Default;
 
@@ -142,7 +143,7 @@ namespace Algoritmer_Projekt
                     if (pointer < 0) break;             // Pointer >= 0: Vi må ikke ryge ud over kanten
 
                     count++;
-                    if (comparer.Compare(_arr[pointer], key) > 0) break;     // arr[pointer] < key: Tallet til venstre er mindre end vores key
+                    if (comparer.Compare(_arr[pointer], key) < 0) break;     // arr[pointer] < key: Tallet til venstre er mindre end vores key
 
                     _arr[pointer + 1] = _arr[pointer];  // Skub det store tal til højre
                     pointer--;                          // Ryk pointeren til venstre

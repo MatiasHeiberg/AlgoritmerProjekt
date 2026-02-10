@@ -17,7 +17,7 @@ namespace Algoritmer_Projekt
 
             Add(list1);
 
-            Console.WriteLine($"Bubble sort: {list1.Sort()}\n{list1}");
+            Console.WriteLine($"Bubble sort: {list1.Sort(algorithm : 1)}\n{list1}");
         }
         public static MyList<int> Add(MyList<int> list)
         {

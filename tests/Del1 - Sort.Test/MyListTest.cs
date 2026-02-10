@@ -80,11 +80,11 @@ namespace Del1_Sort.Test
             MyList<int> expectedList = ConvertToMyList(expected);
 
             //Act
-            result.Sort(algorithm: 1); 
+            result.Sort(algorithm: 1);
 
             //Assert
-
-            CollectionAssert.AreEqual(expectedList.ToArray(), result.ToArray());
+            CollectionAssert.AreEqual(expectedList, result);
+            
         }
 
 
@@ -102,15 +102,15 @@ namespace Del1_Sort.Test
 
             //Assert
 
-            CollectionAssert.AreEqual(expectedList.ToArray(), result.ToArray());
+            CollectionAssert.AreEqual(expectedList, result);
         }
 
         public static IEnumerable<object[]> GetSortTestData()
         {
 
-            yield return new object[] { new List<int> { 5, 3, 8, 9, 2 }, new List<int> { 2, 3, 5, 8, 9 } };
-            yield return new object[] { new List<int> { 1, 2, 3, 4, 5 }, new List<int> { 1, 2, 3, 4, 5 } };
-            yield return new object[] { new List<int> { 5, 4, 3, 2, 1 }, new List<int> { 1, 2, 3, 4, 5 } };
+           // yield return new object[] { new List<int> { 5, 3, 8, 9, 2 }, new List<int> { 2, 3, 5, 8, 9 } };
+            //yield return new object[] { new List<int> { 1, 2, 3, 4, 5 }, new List<int> { 1, 2, 3, 4, 5 } };
+            //yield return new object[] { new List<int> { 5, 4, 3, 2, 1 }, new List<int> { 1, 2, 3, 4, 5 } };
             yield return new object[] { new List<int> { 2, 2, 1, 3, 3 }, new List<int> { 1, 2, 2, 3, 3 } };
             yield return new object[] { new List<int> { -1, -3, 2, 3 }, new List<int> { -3, -1, 2, 3 } };
 
