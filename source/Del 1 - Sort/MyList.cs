@@ -41,7 +41,7 @@ namespace Algoritmer_Projekt
             if (value == null)
                 throw new ArgumentNullException("value cannot be null");
 
-            if (_arr.Length <= _pointer)
+            if (_arr.Length <= Count)
             {
                 var newLength = _arr.Length == 0 ? 4 : _arr.Length * 2;
                 Array.Resize(ref _arr, newLength);
@@ -85,7 +85,6 @@ namespace Algoritmer_Projekt
             else throw new ArgumentException();
         }
       
-
         private int BubbleSort(IComparer<T> comparer)
                 {
             if (_arr.Length == 0) throw new ArgumentException();
@@ -158,7 +157,7 @@ namespace Algoritmer_Projekt
 
         public override string ToString()
         {
-            return $"[{string.Join(", ", _arr[.._pointer])}]";
+            return $"[{string.Join(", ", _arr[..Count])}]";
         }
 
         public IEnumerator<T> GetEnumerator()
