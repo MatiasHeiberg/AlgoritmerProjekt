@@ -86,73 +86,109 @@ namespace Algoritmer_Projekt
         }
       
         private int BubbleSort(IComparer<T> comparer)
-                {
-            if (_arr.Length == 0) throw new ArgumentException();
+        {
+            int count = default;
+            if (_arr.Length == 0) throw new ArgumentException(); count++;
+            if (_arr == null) throw new NullReferenceException(); count++;
             
-                    int comparisonCount = default;
-                    int unsorted = Count - 1;
-                    bool swapped;
-                    while (unsorted > 0)
+            int unsorted = Count - 1;
+            bool swapped;
+            do
+            {
+                count++;
+                swapped = false;
+                for (int i = 0; i < unsorted; i++)
+                {
+                    var current = this[i];
+                    var next = this[i + 1];
+
+                    if (comparer.Compare(current, next) > 0) count++;
                     {
-                        swapped = false;
-                        for (int i = 0; i < unsorted; i++)
-                        {
-                            var current = this[i];
-                            var next = this[i + 1];
+                        T temp = this[i];
+                        this[i] = this[i + 1];
+                        this[i + 1] = temp;
 
-                            comparisonCount++;
-                            if (comparer.Compare(current, next) > 0)
-                            {
-                                T temp = this[i];
-                                this[i] = this[i + 1];
-                                this[i + 1] = temp;
-
-                                swapped = true;
-                            }
-                        }
-                        if (!swapped)                                       // Hvis vi ingen værdier blev byttet efter at have itereret hele listen igennem, så er det fordi den allerede er sorteret. 
-                            break;                                          // Stop sorteringen tidligt.
-
-                       //unsorted--;
+                        swapped = true;
                     }
-                    return comparisonCount;
                 }
-        
+                if (!swapped)                                       // Hvis vi ingen værdier blev byttet efter at have itereret hele listen igennem, så er det fordi den allerede er sorteret. 
+                    break;                                          // Stop sorteringen tidligt.
+
+                unsorted--;
+            } while (unsorted > 0);
+            return count;
+        }
+
+        //private int InsertionSort(IComparer<T> comparer)
+        //{
+        //    int count = default;                                            // Vores comparison tæller
+
+        //    if (_arr == null) throw new NullReferenceException(); count++;
+        //    if (_arr.Length == 0) throw new ArgumentException(); count++;
+
+        //    for (int i = 1; i < Count; i++, count++)
+        //    {
+        //        T key = this[i];                                            // Det tal vi vil placere
+        //        int pointer = i - 1;                                        // Vi starter med at kigge til venstre
+
+        //        while (true)
+        //        {
+        //            count++;
+        //            if (pointer < 0) break;                                 // Pointer >= 0: Vi må ikke ryge ud over kanten. Dette er vores stop-betingelse
+
+        //            count++;
+        //            if (comparer.Compare(this[pointer], key) < 0) break;    // arr[pointer] < key: Tallet til venstre er mindre end vores key
+
+        //            this[pointer + 1] = this[pointer];                      // Skub det store tal til højre
+        //            pointer--;                                              // Ryk pointeren til venstre
+        //        }
+
+        //                                                                    // Når while-løkken stopper (enten pga. start af array eller et mindre tal),
+        //                                                                    // så er "pointer + 1" det korrekte hul til vores key.
+        //        this[pointer + 1] = key;
+        //    }
+        //    return count;
+        }
         private int InsertionSort(IComparer<T> comparer)
         {
             int count = default;                                            // Vores comparison tæller
 
-            
-            if (_arr == null)
-                throw new Exception();
+            if (_arr == null) throw new NullReferenceException(); count++;
+            if (_arr.Length == 0) throw new ArgumentException(); count++;
 
-            
-            if (_arr.Length == 0)
-                throw new ArgumentException();
+            int minIndex = 0;
+            for (int i = 1; i < Count; i++, count++)
+            {
+                count++;
+                if (comparer.Compare(this[i], this[minIndex]) < 0) minIndex = i;
+            }
+            Swap(0, minIndex);
 
-
-            for (int i = 1; i < Count; i++)
+            for (int i = 2; i < Count; i++, count++)
             {
                 T key = this[i];                                            // Det tal vi vil placere
                 int pointer = i - 1;                                        // Vi starter med at kigge til venstre
-                                                        
+
                 while (true)
                 {
-                    count++;
-                    if (pointer < 0) break;                                 // Pointer >= 0: Vi må ikke ryge ud over kanten. Dette er vores stop-betingelse
-
                     count++;
                     if (comparer.Compare(this[pointer], key) < 0) break;    // arr[pointer] < key: Tallet til venstre er mindre end vores key
 
                     this[pointer + 1] = this[pointer];                      // Skub det store tal til højre
                     pointer--;                                              // Ryk pointeren til venstre
                 }
-
                                                                             // Når while-løkken stopper (enten pga. start af array eller et mindre tal),
                                                                             // så er "pointer + 1" det korrekte hul til vores key.
                 this[pointer + 1] = key;
             }
             return count;
+
+            void Swap(int targetIndex, int sourceIndex)
+            {
+                T temp = this[targetIndex];
+                this[targetIndex] = this[sourceIndex];
+                this[sourceIndex] = temp;
+            }
         }
 
         public override string ToString()
