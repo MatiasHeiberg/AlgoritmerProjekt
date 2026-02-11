@@ -97,15 +97,15 @@ namespace Algoritmer_Projekt
                         swapped = false;
                         for (int i = 0; i < unsorted; i++)
                         {
-                            var current = _arr[i];
-                            var next = _arr[i + 1];
+                            var current = this[i];
+                            var next = this[i + 1];
 
                             comparisonCount++;
                             if (comparer.Compare(current, next) > 0)
                             {
-                                T temp = _arr[i];
-                                _arr[i] = _arr[i + 1];
-                                _arr[i + 1] = temp;
+                                T temp = this[i];
+                                this[i] = this[i + 1];
+                                this[i + 1] = temp;
 
                                 swapped = true;
                             }
@@ -113,7 +113,7 @@ namespace Algoritmer_Projekt
                         if (!swapped)                                       // Hvis vi ingen værdier blev byttet efter at have itereret hele listen igennem, så er det fordi den allerede er sorteret. 
                             break;                                          // Stop sorteringen tidligt.
 
-                        unsorted--;
+                       //unsorted--;
                     }
                     return comparisonCount;
                 }
@@ -122,35 +122,35 @@ namespace Algoritmer_Projekt
         {
             int count = default;                                            // Vores comparison tæller
 
-            count++;
+            
             if (_arr == null)
                 throw new Exception();
 
-            count++;
+            
             if (_arr.Length == 0)
                 throw new ArgumentException();
 
 
             for (int i = 1; i < Count; i++)
             {
-                T key = _arr[i];                                            // Det tal vi vil placere
+                T key = this[i];                                            // Det tal vi vil placere
                 int pointer = i - 1;                                        // Vi starter med at kigge til venstre
                                                         
                 while (true)
                 {
                     count++;
-                    if (pointer < 0) break;                                 // Pointer >= 0: Vi må ikke ryge ud over kanten
+                    if (pointer < 0) break;                                 // Pointer >= 0: Vi må ikke ryge ud over kanten. Dette er vores stop-betingelse
 
                     count++;
-                    if (comparer.Compare(_arr[pointer], key) < 0) break;    // arr[pointer] < key: Tallet til venstre er mindre end vores key
+                    if (comparer.Compare(this[pointer], key) < 0) break;    // arr[pointer] < key: Tallet til venstre er mindre end vores key
 
-                    _arr[pointer + 1] = _arr[pointer];                      // Skub det store tal til højre
+                    this[pointer + 1] = this[pointer];                      // Skub det store tal til højre
                     pointer--;                                              // Ryk pointeren til venstre
                 }
 
                                                                             // Når while-løkken stopper (enten pga. start af array eller et mindre tal),
                                                                             // så er "pointer + 1" det korrekte hul til vores key.
-                _arr[pointer + 1] = key;
+                this[pointer + 1] = key;
             }
             return count;
         }
