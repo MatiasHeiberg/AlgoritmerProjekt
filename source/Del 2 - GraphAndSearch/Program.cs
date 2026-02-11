@@ -15,6 +15,8 @@
             themePark.AddNode("Pirate Ship", themePark._nodes["Ice Cream"]);
             themePark.AddNode("Climbing Tower", themePark._nodes["Roller Coaster"]);
             themePark.AddNode("Volcano Ride", themePark._nodes["Climbing Tower"]);
+
+            themePark.BFS(themePark._nodes["Water Ride"]);
         }
     }
 }

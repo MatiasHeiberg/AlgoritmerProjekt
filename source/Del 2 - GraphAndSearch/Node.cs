@@ -11,18 +11,20 @@ namespace GraphAndSearch
     public class Node<T>
     {
         private List<Edge<T>> _edges;
-        public T Value { get; }
-        public List<Edge<T>> Edges { get; }
+        private T _value;
+        public T Value { get => _value; }
+        public List<Edge<T>> Edges { get => _edges; }
 
-        public Node(T value) : this(value, parent: null)
+        public Node(T value)
         {
-        
+            _edges = [];
+            _value = value;
         }
         public Node(T value, Node<T> parent)
         {
             var edge = new Edge<T>(this, parent);
             _edges = [edge];
-            Value = value;
+            _value = value;
             if (parent != null)
                 parent.AddEdge(edge);
         }
