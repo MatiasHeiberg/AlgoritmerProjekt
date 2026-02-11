@@ -58,7 +58,7 @@ namespace GraphAndSearch
                 if (node == target)
                 {
                     Console.Write($"{target} found!\n\n");
-                    break;
+                    return;
                 }
 
                 Console.Write($"{node} -> ");
@@ -67,9 +67,8 @@ namespace GraphAndSearch
                 {
                     stack.Push(edge.Child); 
                 }
-                if (stack.Count == 0)
-                    Console.Write($"{target} not found\n\n");
             }
+            Console.Write($"{target} not found\n\n");
         }
     }
 }
