@@ -12,21 +12,28 @@ namespace GraphAndSearch
     {
         private List<Edge<T>> _edges;
         public T Value { get; }
+        public List<Edge<T>> Edges { get; }
 
-        //public Node(T value) : this(value, parent: this)
-        //{
+        public Node(T value) : this(value, parent: null)
+        {
         
-        //}
+        }
         public Node(T value, Node<T> parent)
         {
             var edge = new Edge<T>(this, parent);
             _edges = [edge];
             Value = value;
-            parent.AddEdge(edge);
+            if (parent != null)
+                parent.AddEdge(edge);
         }
         public void AddEdge(Edge<T> edge)
         {
             _edges.Add(edge);
+        }
+
+        public override string ToString()
+        {
+            return $"{Value}";
         }
     }
 }

@@ -4,32 +4,17 @@
     {
         static void Main(string[] args)
         {
-            //Graph<string> graph = new Graph<string>();
-            //graph.AddNode("Entrance"); 
-            //graph.AddNode("Carousel");
-            //graph.AddNode("Mini Train");
-            //graph.AddNode("Ice Cream");
-            //graph.AddNode("Roller Coaster");
-            //graph.AddNode("Haunted House");
-            //graph.AddNode("Water Ride");
-            //graph.AddNode("Pirate Ship");
-            //graph.AddNode("Climbing Tower");
-            //graph.AddNode("Volcano Ride");
+            Graph<string> themePark = new("Entrance");
 
-            //graph.AddEdges("Entrance", "Carousel");
-            //graph.AddEdges("Entrance", "Mini Train");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-            //graph.AddEdges("Entrance", "Ice Cream");
-
+            themePark.AddNode("Carousel", themePark._nodes["Entrance"]);
+            themePark.AddNode("Mini Train", themePark._nodes["Entrance"]);
+            themePark.AddNode("Ice Cream", themePark._nodes["Entrance"]);
+            themePark.AddNode("Roller Coaster", themePark._nodes["Carousel"]);
+            themePark.AddNode("Haunted House", themePark._nodes["Carousel"]);
+            themePark.AddNode("Water Ride", themePark._nodes["Mini Train"]);
+            themePark.AddNode("Pirate Ship", themePark._nodes["Ice Cream"]);
+            themePark.AddNode("Climbing Tower", themePark._nodes["Roller Coaster"]);
+            themePark.AddNode("Volcano Ride", themePark._nodes["Climbing Tower"]);
         }
     }
 }
