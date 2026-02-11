@@ -23,7 +23,7 @@ namespace GraphAndSearch
         public Node(T value, Node<T> parent)
         {
             var edge = new Edge<T>(this, parent);
-            _edges = [edge];
+            _edges = [];
             _value = value;
             if (parent != null)
                 parent.AddEdge(edge);

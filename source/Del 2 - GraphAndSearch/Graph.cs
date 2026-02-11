@@ -22,28 +22,53 @@ namespace GraphAndSearch
 
         public void BFS(Node<T> target)
         {
+            Console.WriteLine($"BFS target: {target}");
+
             Queue<Node<T>> queue = new([_root]);
 
             while (queue.Count > 0)
             { 
                 var node = queue.Dequeue();
-                Console.WriteLine(node);
-                if (node == target) break;
 
-                foreach(Edge<T> edge in node.Edges)
+                if (node == target)
                 {
-                    queue.Enqueue(edge.Child);
+                    Console.Write($"{target} found!\n\n");
+                    break;
                 }
+                Console.Write($"{node} -> ");
+
+                foreach (Edge<T> edge in node.Edges)
+                {
+                    queue.Enqueue(edge.Child); 
+                }
+                if (queue.Count == 0)
+                    Console.Write($"{target} not found!\n\n");
             }
         }
 
-        public void DFS()
+        public void DFS(Node<T> target)
         {
-            Stack<Node<T>> stack = [];
+            Console.WriteLine($"DFS target: {target}");
+            Stack<Node<T>> stack = new([_root]);
 
-            foreach (var node in _nodes)
+            while (stack.Count > 0)
             {
+                var node = stack.Pop();
 
+                if (node == target)
+                {
+                    Console.Write($"{target} found!\n\n");
+                    break;
+                }
+
+                Console.Write($"{node} -> ");
+
+                foreach (Edge<T> edge in node.Edges)
+                {
+                    stack.Push(edge.Child); 
+                }
+                if (stack.Count == 0)
+                    Console.Write($"{target} not found\n\n");
             }
         }
     }

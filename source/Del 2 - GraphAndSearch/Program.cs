@@ -17,6 +17,9 @@
             themePark.AddNode("Volcano Ride", themePark._nodes["Climbing Tower"]);
 
             themePark.BFS(themePark._nodes["Water Ride"]);
+            themePark.BFS(themePark._nodes["Volcano Ride"]);
+            themePark.DFS(themePark._nodes["Water Ride"]);
+            themePark.DFS(themePark._nodes["Volcano Ride"]);
         }
     }
 }
