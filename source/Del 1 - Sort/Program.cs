@@ -6,20 +6,39 @@ using System.Text.Json.Serialization;
 
 namespace Algoritmer_Projekt
 {
+    /// <summary>
+    /// Hovedprogrammet for sorteringsalgoritme-demonstration.
+    /// Læser testdata fra JSON-filer, sorterer dem og gemmer resultaterne.
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Programmets indgangspunkt.
+        /// Kører alle sorteringsalgoritmer på de definerede testfiler.
+        /// </summary>
+        /// <param name="args">Kommandolinjeargumenter.</param>
         static void Main(string[] args)
         {
             string[] files = ["notSorted.json", "sorted.json", "reverseSorted.json"];
 
-            SorteringsMotor<int>.KørAlle(files);
+            SortEngine<int>.RunAll(files);
 
             Console.WriteLine("Færdig! Tjek output-mappen.");
         }
 
-        public static class SorteringsMotor<T>
+        /// <summary>
+        /// Klasse til at køre og teste sorteringsalgoritmer.
+        /// Håndterer indlæsning, sortering og eksport af testdata.
+        /// </summary>
+        /// <typeparam name="T">Typen af elementer der skal sorteres.</typeparam>
+        public static class SortEngine<T>
         {
-            public static void KørAlle(string[] files)
+            /// <summary>
+            /// Kører alle sorteringsalgoritmer på alle angivne filer.
+            /// For hver kombination af fil og algoritme gemmes resultatet i output-mappen.
+            /// </summary>
+            /// <param name="files">Array af filnavne der skal behandles.</param>
+            public static void RunAll(string[] files)
             {
                 var algoritmer = new Dictionary<int, string>()
                 {
@@ -46,6 +65,13 @@ namespace Algoritmer_Projekt
                 }
             }
 
+            /// <summary>
+            /// Skriver den sorterede liste og antallet af sammenligninger til en fil.
+            /// Opretter output-mappen hvis den ikke eksisterer.
+            /// </summary>
+            /// <param name="list">Den sorterede liste der skal gemmes.</param>
+            /// <param name="filNavn">Navnet på output-filen.</param>
+            /// <param name="comparisons">Antallet af sammenligninger udført under sorteringen.</param>
             private static void Write(MyList<T> list, string filNavn, int comparisons)
             {
                 string output = $"Comparison count: {comparisons} \nResult:  {list.ToString()}";
@@ -55,6 +81,12 @@ namespace Algoritmer_Projekt
                 File.WriteAllText(filSti, output);
             }
 
+            /// <summary>
+            /// Importerer data fra en JSON-fil og opretter en MyList med værdierne.
+            /// </summary>
+            /// <param name="file">Filnavnet på JSON-filen der skal indlæses.</param>
+            /// <returns>En MyList indeholdende værdierne fra filen.</returns>
+            /// <exception cref="FileNotFoundException">Kastes hvis filen ikke findes.</exception>
             private static MyList<T> ImportFile(string file)
             {
                 MyList<T> list = new MyList<T>();
@@ -81,6 +113,9 @@ namespace Algoritmer_Projekt
                 return list;
             }
 
+            /// <summary>
+            /// Hjælpeklasse til deserialisering af JSON-data.
+            /// </summary>
             private class NumbersData
             {
                 [JsonPropertyName("values")]
@@ -88,6 +123,12 @@ namespace Algoritmer_Projekt
             }
         }
 
+        /// <summary>
+        /// Finder eller opretter output-mappen i solution-roden.
+        /// Søger opad i mappehierarkiet for at finde .sln eller .slnx filen.
+        /// </summary>
+        /// <returns>Den fulde sti til output-mappen.</returns>
+        /// <exception cref="DirectoryNotFoundException">Kastes hvis solution-filen ikke kan findes.</exception>
         private static string GetOutputFolder()
         {
             DirectoryInfo directory = new DirectoryInfo(AppContext.BaseDirectory);
@@ -114,108 +155,3 @@ namespace Algoritmer_Projekt
         }
     }
 }
-
-//using System.Collections.Generic;
-//using System.IO;
-//using System.Text.Json;
-//using System.Text.Json.Serialization;
-
-//namespace Algoritmer_Projekt
-//{
-//    /// <summary>
-//    /// TODO:
-//    /// Indlæse JSON
-//    /// Gemme det i en MyList
-//    /// Sorteres
-//    /// Eksporteres til ny JSON eller txt
-//    /// </summary>
-
-//    public class Program<T>
-//    {
-//        static void Main(string[] args)
-//        {
-
-//            string[] files = ["notSorted.json", "sorted.json", "reverseSorted.json"];
-
-//            Program.Sort(files);
-
-//        }
-
-//        private static void Write<T>(MyList<T> list, string filNavn)
-//        {
-//            string output = list.ToString();
-//            string outputMappe = GetOutputFolder();
-//            string filSti = Path.Combine(outputMappe, filNavn);
-
-//            File.WriteAllText(filSti, output);
-//        }
-
-//        public class NumbersData<T>
-//        {
-//            [JsonPropertyName("values")]
-//            public T[] Values { get; set; } = Array.Empty<T>();
-//        }
-
-//        private static string GetOutputFolder()
-//        {
-//            // 1. Start der hvor programmet kører (nede i bin/Debug/...)
-//            DirectoryInfo directory = new DirectoryInfo(AppContext.BaseDirectory);
-
-//            // 2. Gå opad indtil vi finder mappen, der indeholder .sln filen
-//            while (directory != null && directory.GetFiles("*.slnx").Length == 0)
-//            {
-//                directory = directory.Parent;
-//            }
-
-//            // Sikkerhedscheck: Hvis directory er null, fandt vi aldrig roden
-//            if (directory == null)
-//            {
-//                throw new DirectoryNotFoundException("Kunne ikke finde rodmappen med .sln filen.");
-//            }
-
-//            // 3. Vi er nu i Root. Find eller opret "output" mappen herfra.
-//            string outputPath = Path.Combine(directory.FullName, "output");
-
-//            if (!Directory.Exists(outputPath))
-//            {
-//                Directory.CreateDirectory(outputPath);
-//            }
-
-//            return outputPath;
-//        }
-
-//        private static void Sort(string[] files)
-//        {
-//            foreach (string file in files)
-//            {
-//                MyList<T> list = ImportFile(file);
-
-//                list.Sort(algorithm: 0);
-//                Program<T>.Write<T>(list, "bubbleSort_notSorted.txt");
-//            }
-//        }
-
-//        private static MyList<T> ImportFile(string file)
-//        {
-//            MyList<T> list = new MyList<T>();
-//            string basePath = AppContext.BaseDirectory;
-//            string filePath = Path.Combine(basePath, file);
-//            string jsonString = File.ReadAllText(filePath);
-
-//            var data = JsonSerializer.Deserialize<NumbersData<T>>(jsonString);
-//            T[]? arr = data?.Values;
-
-//            foreach (T i in arr)
-//            {
-//                list.Add(i);
-//            }
-
-//            return list;
-//        }
-
-//        private static navn(MyList<T> list)
-//        {
-//            list.Sort(algorithm: 0);
-//        }
-//    }
-//}

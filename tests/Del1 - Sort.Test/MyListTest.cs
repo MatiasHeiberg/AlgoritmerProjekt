@@ -2,9 +2,16 @@
 using System.Linq;
 namespace Del1_Sort.Test
 {
+    /// <summary>
+    /// Test-klasse for MyList sorteringsfunktionalitet.
+    /// Tester både BubbleSort og InsertionSort algoritmer med forskellige scenarier.
+    /// </summary>
     [TestClass]
     public class MyListTest
     {
+        /// <summary>
+        /// Tester at BubbleSort kaster ArgumentException når listen er tom.
+        /// </summary>
         [TestMethod]
         public void SortTest_sortereTomListeMedBubble_returnererArgumentException()     //MetodeTest_Scenarie_ForventetResultat
         {
@@ -15,8 +22,11 @@ namespace Del1_Sort.Test
             Assert.Throws<ArgumentException>(() => list.Sort(algorithm: 0));            // 0 = bubble sort
         }
 
+        /// <summary>
+        /// Tester at InsertionSort kaster ArgumentException når listen er tom.
+        /// </summary>
         [TestMethod]
-        public void SortTest_sortereTomListeMedInsertion_returnererArgumentException()  //MetodeTest_Scenarie_ForventetResultat
+        public void SortTest_sortereTomListeMedInsertion_returnererArgumentException()  
         {
             // Arrange
             var list = new MyList<int>();
@@ -25,6 +35,10 @@ namespace Del1_Sort.Test
             Assert.Throws<ArgumentException>(() => list.Sort(algorithm: 1));            // 1 = insertion sort
         }
 
+        /// <summary>
+        /// Tester at BubbleSort håndterer en liste med kun ét element korrekt.
+        /// Listen skal forblive uændret.
+        /// </summary>
         [TestMethod]
         public void SortTest_sortereListeMed1ElementBubbleSort_uændretListe()
         {
@@ -42,6 +56,10 @@ namespace Del1_Sort.Test
             Assert.IsTrue(result.SequenceEqual(expected));
         }
 
+        /// <summary>
+        /// Tester at InsertionSort håndterer en liste med kun ét element korrekt.
+        /// Listen skal forblive uændret.
+        /// </summary>
         [TestMethod]
         public void SortTest_sortereListeMed1ElementInsertionSort_uændretListe()
         {
@@ -60,12 +78,18 @@ namespace Del1_Sort.Test
         }
 
 
-        [DataTestMethod]                                                                //Datadriven test, hvor vi kan teste flere scenarier med forskellige input og forventede resultater
+        /// <summary>
+        /// Datadrevet test for InsertionSort med forskellige scenarier.
+        /// Tester average case, allerede sorteret, reverse sorteret, dubletter og negative tal.
+        /// </summary>
+        /// <param name="input">Input-listen der skal sorteres.</param>
+        /// <param name="expected">Den forventede sorterede liste.</param>
+        [DataTestMethod]                                                                
         [DynamicData(nameof(GetSortTestData), DynamicDataSourceType.Method)]            //Henter testdata fra GetSortTestData-metoden
 
         public void SortTest_VariousLists_InsertionSort_SortedCorrectly(List<int> input, List<int> expected)
         {
-            //Arrange                                                                   // Konverterer input og expected fra List<int> til MyList<int> for at kunne bruge vores Sort-metode
+            //Arrange                                                                   
             MyList<int> result = ConvertToMyList(input);
             MyList<int> expectedList = ConvertToMyList(expected);
 
@@ -77,6 +101,12 @@ namespace Del1_Sort.Test
 
         }
 
+        /// <summary>
+        /// Datadrevet test for BubbleSort med forskellige scenarier.
+        /// Tester average case, allerede sorteret, reverse sorteret, dubletter og negative tal.
+        /// </summary>
+        /// <param name="input">Input-listen der skal sorteres.</param>
+        /// <param name="expected">Den forventede sorterede liste.</param>
         [DataTestMethod]
         [DynamicData(nameof(GetSortTestData), DynamicDataSourceType.Method)]
         public void SortTest_VariousLists_BubbleSort_SortedCorrectly(List<int> input, List<int> expected)
@@ -92,6 +122,12 @@ namespace Del1_Sort.Test
             CollectionAssert.AreEqual(expectedList, result);
         }
 
+        /// <summary>
+        /// Leverer testdata til de datadrevne tests.
+        /// Inkluderer scenarier for tilfældige tal, sorterede lister, reverse sorterede lister,
+        /// dubletter og negative tal.
+        /// </summary>
+        /// <returns>En samling af test-cases with input og forventet output.</returns>
         private static IEnumerable<object[]> GetSortTestData()
         {
             yield return new object[] { new List<int> { 5, 3, 8, 9, 2 }, new List<int> { 2, 3, 5, 8, 9 } }; // Tilfældige tal, average case
@@ -101,6 +137,12 @@ namespace Del1_Sort.Test
             yield return new object[] { new List<int> { -1, -3, 2, 3 }, new List<int> { -3, -1, 2, 3 } };   // Minus tal
         }
 
+        /// <summary>
+        /// Hjælpemetode til at konvertere en standard List til MyList.
+        /// Bruges til at forberede testdata.
+        /// </summary>
+        /// <param name="value">Listen der skal konverteres.</param>
+        /// <returns>En MyList med samme elementer.</returns>
         private MyList<int> ConvertToMyList(List<int> value)
         {
             MyList<int> list = new MyList<int>();

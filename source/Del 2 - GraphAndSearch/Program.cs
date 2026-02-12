@@ -2,6 +2,12 @@
 {
     public class Program
     {
+        /// <summary>
+        /// Programmets indgangspunkt.
+        /// Opretter en graf der repræsenterer en forlystelsespark med forbundne attraktioner
+        /// og demonstrerer BFS og DFS søgninger.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Graph<string> themePark = new("Entrance");
